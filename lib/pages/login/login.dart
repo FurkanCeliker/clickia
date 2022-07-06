@@ -1,8 +1,10 @@
 import 'package:clickia/constants/logo_path.dart';
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/constants/style.dart';
+import 'package:clickia/widgets/social_logo_widget.dart';
 import 'package:clickia/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:clickia/route/route.dart' as route;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -67,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: _yukseklik * 0.03,
                 ),
                 LoginTypeButton(// Giriş Yap Button
+                routeName: route.homePage,
                   yukseklik: _yukseklik,
                   genislik: _genislik,
                   textTitle: 'Giriş Yap',
@@ -83,17 +86,21 @@ class _LoginPageState extends State<LoginPage> {
                         'Şifremi Unuttum',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.pushNamed(context, route.profilePage);
+                      }),
                 ),
                 SizedBox(
                   height: _yukseklik * 0.01,
                 ),
                 LoginTypeButton(
+                  routeName: route.registerPage,
                   yukseklik: _yukseklik,
                   genislik: _genislik,
                   textTitle: 'Bir Hesap Oluşturun',
                   buttonColor: Color(0xffF4630C),
                   textColor: Colors.white,
+
                 ),
                 
                 

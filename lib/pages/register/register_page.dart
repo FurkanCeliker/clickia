@@ -2,7 +2,9 @@ import 'package:clickia/constants/logo_path.dart';
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/constants/style.dart';
 import 'package:clickia/widgets/widgets.dart';
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:clickia/route/route.dart' as route;
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
@@ -12,13 +14,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController _registerDateInput= TextEditingController();
+  TextEditingController _registerDateInput = TextEditingController();
   TextEditingController _registerMailController = TextEditingController();
   TextEditingController _registerPasswordController = TextEditingController();
   TextEditingController _registerPasswordTwoController =
       TextEditingController();
   TextEditingController _registerNameController = TextEditingController();
   TextEditingController _registerSurnameController = TextEditingController();
+  DateTime? selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -81,81 +84,74 @@ class _RegisterPageState extends State<RegisterPage> {
             SizedBox(
               height: _yukseklik * 0.03,
             ),
-            TextFormPasswordWidget(registerPasswordTwoController: _registerPasswordController,labelText: 'Şifre',),
+            TextFormPasswordWidget(
+              registerPasswordTwoController: _registerPasswordController,
+              labelText: 'Şifre',
+            ),
             SizedBox(
               height: _yukseklik * 0.03,
             ),
-            TextFormPasswordWidget(registerPasswordTwoController: _registerPasswordTwoController,labelText: 'Şifre Tekrar',),
+            TextFormPasswordWidget(
+              registerPasswordTwoController: _registerPasswordTwoController,
+              labelText: 'Şifre Tekrar',
+            ),
             SizedBox(
               height: _yukseklik * 0.03,
             ),
+            /*
             TextFormField(
-      
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelStyle: TextStyle(
-          color: Colors.grey,
-        ),
-        
-        fillColor: Color(0xff212020),
-        filled: true,
-        border: OutlineInputBorder(
-          
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-      ),
-      obscureText: false,
-      controller: _registerDateInput,
-      keyboardType: TextInputType.datetime,
-      cursorColor: Colors.white,
-    ),
-SizedBox(
-              height: _yukseklik * 0.03,
-            ),    
-            LoginTypeButton(
-                  yukseklik: _yukseklik,
-                  genislik: _genislik,
-                  textTitle: 'Bir Hesap Oluşturun',
-                  buttonColor: Color(0xffF4630C),
-                  textColor: Colors.black87,
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelStyle: TextStyle(
+                  color: Colors.grey,
                 ),
+                fillColor: Color(0xff212020),
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              obscureText: false,
+              controller: _registerDateInput,
+              keyboardType: TextInputType.datetime,
+              cursorColor: Colors.white,
+            ),*/
+            
+            DateTimeFormField(
+              decoration: InputDecoration(
+                filled: true,
+                labelStyle: TextStyle(color: Colors.grey),
+                errorStyle: TextStyle(color: Colors.redAccent),
+                hintStyle: TextStyle(color: Colors.white),
+                fillColor: Color(0xff212020),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide.none,
+                ),
+                suffixIcon: Icon(Icons.event_note),
+                labelText: 'Doğum Günü',
+              ),
+              mode: DateTimeFieldPickerMode.date,
+              autovalidateMode: AutovalidateMode.always,
+              onDateSelected: (DateTime value) {
+                selectedDate = value;
+              },
+            ),
+             SizedBox(
+              height: _yukseklik * 0.03,
+            ),
+            LoginTypeButton(
+              routeName: route.homePage,
+              yukseklik: _yukseklik,
+              genislik: _genislik,
+              textTitle: 'Bir Hesap Oluşturun',
+              buttonColor: Color(0xffF4630C),
+              textColor: Colors.black87,
+            ),
           ],
         ),
       ),
     ));
-  }
-}
-
-class TextFormPasswordWidget extends StatelessWidget {
-  const TextFormPasswordWidget({
-    Key? key,
-    required String labelText,
-    required TextEditingController registerPasswordTwoController,
-  }) : _registerPasswordTwoController = registerPasswordTwoController,_labelText=labelText, super(key: key);
-  final _labelText;
-  final TextEditingController _registerPasswordTwoController;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelStyle: TextStyle(
-          color: Colors.grey,
-        ),
-        labelText: 'Şifre',
-        fillColor: Color(0xff212020),
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-      ),
-      obscureText: true,
-      controller: _registerPasswordTwoController,
-      keyboardType: TextInputType.visiblePassword,
-      cursorColor: Colors.white,
-    );
   }
 }
