@@ -29,6 +29,7 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
     "Eski Savaş ve Yeni Dedektif",
     "Kaira'nın Gerçek Formu"
   ];
+  int fontSize=15;
   final controller = ScrollController();
   List<String> items = List.generate(
     50,
@@ -122,10 +123,8 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
               child: Slider(
                   inactiveColor:
                       modeIsLight == true ? Colors.black : Colors.white,
-                  thumbColor:
-                      modeIsLight == true ? Colors.grey : Colors.blue,
-                  activeColor:
-                      modeIsLight == true ? Colors.grey : Colors.blue,
+                  thumbColor: modeIsLight == true ? Colors.grey : Colors.blue,
+                  activeColor: modeIsLight == true ? Colors.grey : Colors.blue,
                   min: 0,
                   max: duration.inSeconds.toDouble(),
                   value: position.inSeconds.toDouble(),
@@ -255,7 +254,10 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
                         context: context,
                         builder: (context) =>
                             buildSheet(_genislik, _yukseklik)),
-                    icon: Icon(Icons.library_books_outlined,color: modeIsLight==true?Colors.black:Colors.white,)),
+                    icon: Icon(
+                      Icons.library_books_outlined,
+                      color: modeIsLight == true ? Colors.black : Colors.white,
+                    )),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
@@ -307,7 +309,7 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
   Container buildSheet(double _genislik, double _yukseklik) {
     return Container(
         padding: const EdgeInsets.all(20),
-        height: _yukseklik * 0.2,
+        height: _yukseklik * 0.15,
         color: modeIsLight == true ? Colors.white : Colors.black,
         child: StatefulBuilder(
           builder: (context, setState) {
@@ -334,7 +336,6 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
                     this.setState(() {
                       modeIsLight = !modeIsLight;
                     });
-                    
                   },
                   icon: modeIsLight == true
                       ? Icon(Icons.mode_night)
@@ -344,6 +345,17 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
                 ),
                 IconButton(
                   onPressed: () {
+                    showModalBottomSheet(
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(50))),
+                        context: context,
+                        builder: (context) => buildFontSize(
+                              _yukseklik,
+                              _genislik,
+                              () {},
+                            ));
                     setState() {}
                   },
                   icon: Icon(Icons.abc),
@@ -362,6 +374,36 @@ class _NovelDetailPageState extends State<NovelDetailPage> {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
+  }
+
+  Container buildFontSize(_yukseklik, genislik, onTap) {
+    return Container(
+      height: _yukseklik * 0.1,
+      child: StatefulBuilder(builder: (context,builder){
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            
+            IconButton(
+                onPressed: () {
+                 setState(() {
+                    fontSize=fontSize-1;
+                 });
+                },
+                icon:const Icon(
+                  Icons.remove,
+                  size: 20,
+                )),
+                Text(fontSize.toString()),
+            IconButton(onPressed: () {
+             setState(() {
+                fontSize=fontSize+1;
+             });
+            }, icon: Icon(Icons.add))
+          ]);
+      },)
+    );
   }
 
   Container buildChapterMenu(yukseklik, genislik, onTap, List chapters) {

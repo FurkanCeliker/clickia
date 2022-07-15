@@ -6,8 +6,10 @@ class MyFavoriteListWidget extends StatelessWidget {
     required List<Map> myFavorite,
     required double yukseklik,
     required VoidCallback onTap,
-
-  }) : _myFavorite = myFavorite, _yukseklik = yukseklik,_onTap=onTap, super(key: key);
+  })  : _myFavorite = myFavorite,
+        _yukseklik = yukseklik,
+        _onTap = onTap,
+        super(key: key);
 
   final List<Map> _myFavorite;
   final double _yukseklik;
@@ -15,21 +17,24 @@ class MyFavoriteListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          crossAxisSpacing: _yukseklik * 0.02,
+          mainAxisSpacing: _yukseklik * 0.02,
+          childAspectRatio: 3 / 4,
+          maxCrossAxisExtent: _yukseklik * 0.15),
       shrinkWrap: true,
-      itemCount: _myFavorite[0].length,
+      itemCount: _myFavorite.length,
       itemBuilder: (context, index) {
-       final String values= _myFavorite[0].values.elementAt(index);
-       final String keys=_myFavorite[0].keys.elementAt(index);
-        return ListTile(
-          contentPadding: EdgeInsets.symmetric(vertical: _yukseklik*0.02),
+        return InkWell(
           onTap: _onTap,
-          title: Text(
-            keys,
-            style: TextStyle(color: Colors.white),
+          child: Card(
+            child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(_myFavorite[index]['img']),
+                        fit: BoxFit.cover))),
           ),
-          leading: Image.network(values,),
         );
       },
     );

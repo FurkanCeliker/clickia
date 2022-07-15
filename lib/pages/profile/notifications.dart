@@ -18,13 +18,12 @@ class _NotificationsState extends State<Notifications> {
     double _genislik = Constants.getSizeWidth(context);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
+          Navigator.pop(context);
+        }),
+        actions:const [Icon(null)],
           backgroundColor: Colors.transparent,
-          title: const Center(
-            child: Text(
-        'Notifications',
-        style: TextStyle(fontSize: 22),
-      ),
-          )),
+          ),
           body: Column(
             children: [
               NotificationsWidget(notificationsList: _notificationsList, genislik: _genislik,onTap: (){},)

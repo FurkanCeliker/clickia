@@ -1,5 +1,7 @@
 import 'package:clickia/constants/logo_path.dart';
 import 'package:clickia/constants/style.dart';
+import 'package:clickia/pages/home/home_page.dart';
+import 'package:clickia/pages/watch_detail/watch_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +14,7 @@ class SliderWidget extends StatelessWidget {
     required VoidCallback onTap,
   })  : _yukseklik = yukseklik,
         _genislik = genislik,
-        _onTap=onTap,
+        _onTap = onTap,
         url = url,
         super(key: key);
 
@@ -24,12 +26,13 @@ class SliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {},
+      onTap: _onTap,
       child: Container(
         height: _yukseklik * 0.2,
         width: _genislik * 0.3,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-        child: Image.network(url),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(image: NetworkImage(url))),
       ),
     );
   }
@@ -42,12 +45,14 @@ class MovieSlider extends StatelessWidget {
     required double yukseklik,
     required double genislik,
     required List kategoriAdi,
+    required List imageList,
   })  : _yukseklik = yukseklik,
         _genislik = genislik,
         _kategoriSayisi = kategoriSayisi,
         kategoriAdi = kategoriAdi,
+        _imageList = imageList,
         super(key: key);
-
+  final List _imageList;
   final double _yukseklik;
   final double _genislik;
   final List kategoriAdi;
@@ -64,22 +69,22 @@ class MovieSlider extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: _yukseklik * 0.02,
+                height: _yukseklik * 0.01,
               ),
               Text(
                 kategoriAdi[index],
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               SizedBox(
-                height: _yukseklik * 0.02,
+                height: _yukseklik * 0.01,
               ),
               SizedBox(
-                height: _yukseklik * 0.22,
-                width: _genislik * 0.9,
+                height: _yukseklik * 0.23,
+                width: _genislik * 1,
                 child: GridView.builder(
                     // Future builder içine al
-                    itemCount: 6, // apiden gelen veri eklenecek
-
+                    itemCount: _imageList.length, // apiden gelen veri eklenecek
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -89,11 +94,12 @@ class MovieSlider extends StatelessWidget {
                     ),
                     itemBuilder: (context, i) {
                       return SliderWidget(
-                        onTap: (){},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WatchDetailPage(),));
+                        },
                         yukseklik: _yukseklik,
                         genislik: _genislik,
-                        url:
-                            'https://clickia.tv//storage/310/623a145972ee2_8d23c7ec-5d01-452d-a54e-734a3a5bf838png',
+                        url: _imageList[i],
                       );
                     }),
               ),
@@ -107,39 +113,108 @@ class TextFormPasswordWidget extends StatelessWidget {
   const TextFormPasswordWidget({
     Key? key,
     required String labelText,
+    required double genislik,
+    required double yukseklik,
     required TextEditingController registerPasswordTwoController,
   })  : _registerPasswordTwoController = registerPasswordTwoController,
         _labelText = labelText,
+        _genislik = genislik,
+        _yukseklik = yukseklik,
         super(key: key);
   final String _labelText;
   final TextEditingController _registerPasswordTwoController;
+  final double _genislik;
+  final double _yukseklik;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      style: TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelStyle: TextStyle(
-          color: Colors.grey,
+    return Container(
+      width: _genislik * 0.6,
+      height: _yukseklik * 0.07,
+      child: TextFormField(
+        style: TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          labelStyle: TextStyle(
+            color: Colors.grey,
+          ),
+          labelText: _labelText,
+          fillColor: Color(0xff212020),
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
         ),
-        labelText: _labelText,
-        fillColor: Color(0xff212020),
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
+        obscureText: true,
+        controller: _registerPasswordTwoController,
+        keyboardType: TextInputType.visiblePassword,
+        cursorColor: Colors.white,
       ),
-      obscureText: true,
-      controller: _registerPasswordTwoController,
-      keyboardType: TextInputType.visiblePassword,
-      cursorColor: Colors.white,
     );
   }
 }
 
+class MovieSliderV2 extends StatelessWidget {
+  MovieSliderV2({
+    Key? key,
+    required VoidCallback onTap,
+    required int kategoriSayisi,
+    required double yukseklik,
+    required double genislik,
+    required List imageList,
+  })  : _yukseklik = yukseklik,
+        _genislik = genislik,
+        _kategoriSayisi = kategoriSayisi,
+        _imageList = imageList,
+        _onTap = onTap,
+        super(key: key);
+  final List _imageList;
+  final double _yukseklik;
+  final double _genislik;
+  final int _kategoriSayisi;
+  VoidCallback _onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: _kategoriSayisi,
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: _yukseklik * 0.36,
+                width: _genislik,
+                child: GridView.builder(
+                    // Future builder içine al
+                    itemCount: _imageList.length, // apiden gelen veri eklenecek
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      mainAxisSpacing: 0,
+                      childAspectRatio: 1.35,
+                    ),
+                    itemBuilder: (context, i) {
+                      return SliderWidget(
+                        onTap: _onTap,
+                        yukseklik: _yukseklik,
+                        genislik: _genislik,
+                        url: _imageList[i],
+                      );
+                    }),
+              ),
+            ],
+          );
+        });
+  }
+}
+
 class TextFormFieldWidget extends StatelessWidget {
-  const TextFormFieldWidget({
+  TextFormFieldWidget({
     Key? key,
     required this.controllerMail,
     required this.labelText,
@@ -148,6 +223,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final String labelText;
   final TextEditingController controllerMail;
   final TextInputType textInputType;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -173,9 +249,9 @@ class TextFormFieldWidget extends StatelessWidget {
 }
 
 class LoginTypeButton extends StatelessWidget {
-   LoginTypeButton({
+  LoginTypeButton({
     Key? key,
-    required String routeName,
+    required Widget routeName,
     required double yukseklik,
     required Color textColor,
     required double genislik,
@@ -186,14 +262,14 @@ class LoginTypeButton extends StatelessWidget {
         _textTitle = textTitle,
         _buttonColor = buttonColor,
         _textColor = textColor,
-        _routeName=routeName,
+        _routeName = routeName,
         super(key: key);
   final Color _textColor;
   final double _yukseklik;
   final double _genislik;
   final String _textTitle;
   final Color _buttonColor;
-  final String _routeName;
+  final Widget _routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +279,12 @@ class LoginTypeButton extends StatelessWidget {
       decoration: BoxDecoration(
           color: _buttonColor, borderRadius: BorderRadius.circular(10)),
       child: TextButton(
-        onPressed:(){
-          Navigator.pushNamed(context, _routeName);
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => _routeName,
+              ));
         },
         child: Text(
           _textTitle,
@@ -244,19 +324,18 @@ class MyAccountTextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          _contentName,
-          style: StyleConst.getMyAccountTextStyle(),
-        ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: _genislik * 0.02),
-          child: SizedBox(
-            height: _yukseklik * 0.1,
+          child: Container(
+            height: _yukseklik * 0.06,
+            width: _genislik * 0.5,
             child: TextField(
                 obscureText: _obscureText,
                 keyboardType: _keyboardType,
                 decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: _genislik * 0.02),
                     hintText: _content,
                     fillColor: Colors.grey,
                     filled: true,
@@ -267,7 +346,6 @@ class MyAccountTextFieldWidget extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey),
                         borderRadius: BorderRadius.all(Radius.circular(20)))),
-                maxLength: 20,
                 controller: _textfieldController),
           ),
         ),
@@ -338,16 +416,22 @@ class CustomClipPath extends CustomClipper<Path> {
 }
 
 class BenzerIceriklerSlider extends StatelessWidget {
-  const BenzerIceriklerSlider({
+  BenzerIceriklerSlider({
     Key? key,
+    required List imageList,
     required double yukseklik,
     required double genislik,
+    required VoidCallback onTap,
   })  : _yukseklik = yukseklik,
         _genislik = genislik,
+        _imageList = imageList,
+        _onTap = onTap,
         super(key: key);
 
   final double _yukseklik;
   final double _genislik;
+  final List _imageList;
+  VoidCallback _onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -355,11 +439,11 @@ class BenzerIceriklerSlider extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: _yukseklik * 0.22,
-          width: _genislik * 0.9,
+          height: _yukseklik * 0.173,
+          width: _genislik * 1,
           child: GridView.builder(
               // Future builder içine al
-              itemCount: 6, // apiden gelen veri eklenecek
+              itemCount: _imageList.length, // apiden gelen veri eklenecek
               scrollDirection: Axis.horizontal,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
@@ -368,11 +452,10 @@ class BenzerIceriklerSlider extends StatelessWidget {
               ),
               itemBuilder: (context, i) {
                 return SliderWidget(
-                  onTap: (){},
+                  onTap: _onTap,
                   yukseklik: _yukseklik,
                   genislik: _genislik,
-                  url:
-                      'https://clickia.tv//storage/310/623a145972ee2_8d23c7ec-5d01-452d-a54e-734a3a5bf838png',
+                  url: _imageList[i],
                 );
               }),
         ),

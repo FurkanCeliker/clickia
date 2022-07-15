@@ -28,7 +28,7 @@ class _NovelIcerikSliderState extends State<NovelIcerikSlider> {
       children: [
         SizedBox(
           height: _yukseklik * 0.25,
-          width: _genislik * 0.9,
+          width: _genislik * 1,
           child: GridView.builder(
               // Future builder içine al
               itemCount: widget._categoryCoverImageList.length, // apiden gelen veri eklenecek
@@ -36,7 +36,7 @@ class _NovelIcerikSliderState extends State<NovelIcerikSlider> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 mainAxisSpacing: 0,
-                childAspectRatio: 1.3,
+                childAspectRatio: 1.5,
               ),
               itemBuilder: (context, i) {
                 return Column(
@@ -47,7 +47,7 @@ class _NovelIcerikSliderState extends State<NovelIcerikSlider> {
                       genislik: _genislik,
                       url: widget._categoryCoverImageList[i],
                     ),
-                    Text(widget._contentTitle[i]),
+                    Expanded(child: Text(widget._contentTitle[i])),
                   ],
                 );
               }),

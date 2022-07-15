@@ -16,9 +16,10 @@ class _SettingsState extends State<Settings> {
     double _genislik = Constants.getSizeWidth(context);
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('Ayarlar'),
-        ),
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
+          Navigator.pop(context);
+        }),
+        actions:const [Icon(null)],
         backgroundColor: Colors.transparent,
       ),
       body: Column(
@@ -29,7 +30,12 @@ class _SettingsState extends State<Settings> {
               buttonName: 'Çıkış Yap',
               buttonAssetImageUrl: 'lib/assets/logout.png',
               voidCallback: () {}),
-              ProfileElevatedButtonWidget(genislik: _genislik, yukseklik: _yukseklik, buttonName: 'Hesabımı Sil', buttonAssetImageUrl: 'lib/assets/remove.png', voidCallback: (){})
+          ProfileElevatedButtonWidget(
+              genislik: _genislik,
+              yukseklik: _yukseklik,
+              buttonName: 'Hesabımı Sil',
+              buttonAssetImageUrl: 'lib/assets/remove.png',
+              voidCallback: () {})
         ],
       ),
     );

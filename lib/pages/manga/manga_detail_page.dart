@@ -13,8 +13,12 @@ class MangaDetailPage extends StatefulWidget {
 }
 
 class _MangaDetailPageState extends State<MangaDetailPage> {
-  List mangas=['https://i.pinimg.com/736x/5b/2b/a6/5b2ba63d77dcc42614011954a749b73d.jpg','https://i.pinimg.com/236x/00/a3/33/00a33349c21fa3f730bb7201f232b937--great-quotes-seven-deadly-sins.jpg','https://i.pinimg.com/236x/4d/b9/fb/4db9fb0a583b4695afb106fb59455d72--pse-kyoto.jpg',];
- 
+  List mangas = [
+    'https://w7.pngwing.com/pngs/772/867/png-transparent-mangaka-arm-anime-joint-cartoon-couples-black-hair-manga-cartoon.png',
+    'https://i.pinimg.com/736x/f6/10/97/f610978ed5813dd6014084e1181191dc.jpg',
+    'https://i.pinimg.com/originals/ac/59/c6/ac59c631fb4b3451981d0c0d4d9dd15b.jpg',
+  ];
+
   List chapters = [
     'Beklenmeyen Ölüm',
     'Laçin Güçlerini Keşfediyor',
@@ -54,15 +58,15 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
       }
       ;
     });
-
-    
-
-      
   }
 
   Future fetch() async {
     setState(() {
-      mangas.addAll(['https://static.zerochan.net/Hyouka.full.3524264.png', 'https://www.hisglobal.com.tr/assets/images/uploads/1600094393.jpg', 'https://static.wikia.nocookie.net/e302e675-663b-4033-80bf-a68b11ed605e']);
+      mangas.addAll([
+        'https://static.zerochan.net/Hyouka.full.3524264.png',
+        'https://www.hisglobal.com.tr/assets/images/uploads/1600094393.jpg',
+        'https://static.wikia.nocookie.net/e302e675-663b-4033-80bf-a68b11ed605e'
+      ]);
     });
   }
 
@@ -79,79 +83,8 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
         controller: controller,
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: _yukseklik * 0.05),
-              child: Center(
-                child: Container(
-                  height: _yukseklik * 0.35,
-                  width: _genislik * 0.40,
-                  decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                            blurRadius: 4,
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurStyle: BlurStyle.solid),
-                      ],
-                      border: Border.all(color: Colors.blue),
-                      image: DecorationImage(
-                          image: NetworkImage(imageUrl), fit: BoxFit.fill)),
-                ),
-              ),
-            ),
             // Ses dosya kısmı
 
-            SizedBox(
-              height: _yukseklik * 0.05,
-            ),
-           
-            
-            
-            SizedBox(
-              height: _yukseklik * 0.1,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Translator:',
-                  style: TextStyle(
-                      color: modeIsLight == true ? Colors.black : Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
-                Text(
-                  'Nomyummi',
-                  style: TextStyle(
-                      color: modeIsLight == true ? Colors.black : Colors.white,
-                      fontSize: 20),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Editör:',
-                  style: modeIsLight == true
-                      ? StyleConst.getNovelDetailBoldTextStyle()
-                      : StyleConst.getNovelDetailBoldTextStyle()
-                          .copyWith(color: Colors.white),
-                ),
-                SizedBox(
-                  height: _yukseklik * 0.08,
-                ),
-                Text('Gravity Tales',
-                    style: modeIsLight == true
-                        ? StyleConst.getNovelDetailBlack()
-                        : StyleConst.getNovelDetailBlack()
-                            .copyWith(color: Colors.white)),
-              ],
-            ),
-            SizedBox(
-              height: _yukseklik * 0.05,
-            ),
-            
             GestureDetector(
               onTap: () => showModalBottomSheet(
                   context: context,
@@ -159,18 +92,16 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: mangas.length + 1,
+                itemCount: mangas.length,
                 itemBuilder: (context, index) {
-                  if (index < mangas.length) {
-                    final item = mangas[index];
-                    return Image.network(mangas[index]);
-                  } else {
-                    return  Container(
-                      child: Center(
-                        child: LinearProgressIndicator(),
-                      ),
-                    );
-                  }
+                  final item = mangas[index];
+                  return Container(
+                    width: _genislik,
+                    height: _yukseklik,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(mangas[index]),fit: BoxFit.fill)),
+                  );
                 },
               ),
             ),
@@ -210,7 +141,6 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
                     this.setState(() {
                       modeIsLight = !modeIsLight;
                     });
-                    
                   },
                   icon: modeIsLight == true
                       ? Icon(Icons.mode_night)
@@ -231,8 +161,6 @@ class _MangaDetailPageState extends State<MangaDetailPage> {
           },
         ));
   }
-
-  
 
   Container buildChapterMenu(yukseklik, genislik, onTap, List chapters) {
     return Container(

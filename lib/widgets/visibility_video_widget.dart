@@ -22,6 +22,7 @@ class _VisibilityVideoWidgetState extends State<VisibilityVideoWidget> {
   void initState() {
     super.initState();
     BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(
+      
       BetterPlayerDataSourceType.network,
       'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
       useAsmsSubtitles: true,
@@ -42,10 +43,10 @@ class _VisibilityVideoWidgetState extends State<VisibilityVideoWidget> {
         ),
       ],
     );
-
     _betterPlayerController = BetterPlayerController(
-        BetterPlayerConfiguration(),
-        betterPlayerDataSource: betterPlayerDataSource);
+      BetterPlayerConfiguration(),
+      betterPlayerDataSource: betterPlayerDataSource,
+    );
 
     Future.delayed(Duration(seconds: widget._seconds), () {
       if (this.mounted) {
@@ -63,9 +64,10 @@ class _VisibilityVideoWidgetState extends State<VisibilityVideoWidget> {
       maintainState: true,
       visible: _visibleVideo,
       child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: BetterPlayer(controller: _betterPlayerController,)
-      ),
+          aspectRatio: 16 / 9,
+          child: BetterPlayer(
+            controller: _betterPlayerController,
+          )),
     );
   }
 }

@@ -4,6 +4,14 @@ import 'package:clickia/constants/logo_path.dart';
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/constants/style.dart';
 import 'package:clickia/constants/url.dart';
+import 'package:clickia/pages/home/home_page_screen.dart';
+import 'package:clickia/pages/manga/manga_home_page.dart';
+import 'package:clickia/pages/novel/novel_detail_page.dart';
+import 'package:clickia/pages/novel/novel_home_page.dart';
+import 'package:clickia/pages/profile/profile.dart';
+import 'package:clickia/pages/search/search.dart';
+import 'package:clickia/pages/video/video_page.dart';
+import 'package:clickia/pages/watch_detail/watch_detail_page.dart';
 import 'package:clickia/widgets/social_logo_widget.dart';
 import 'package:clickia/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
-
+  int _selectedItem = 0;
   final List<String> _kategoriBaslik = [
     'Ah Benim Tatlı Yalancım',
     'Herşey Aşktan',
@@ -29,8 +37,8 @@ class _HomePageState extends State<HomePage> {
     'Nerde Gönlüm'
   ];
   final List<String> _sliderImageUrlList = [
-    'https://clickia.tv//storage/323/624449d31d9b7_lezzetli-kader-10jpg',
-    'https://clickia.tv//storage/326/624c2b7595ed8_adsiz-tasarim-11jpg'
+    'https://clickia.tv//storage/365/62c4473d8c0a5_clickia-dunyayi-sana-dondurmekjpg',
+    'https://clickia.tv//storage/358/62c42098a14aa_clickia-royal-nirvanajpg'
   ];
   final List<String> _kategoriAltBaslik = [
     '1525',
@@ -46,252 +54,101 @@ class _HomePageState extends State<HomePage> {
     'https://clickia.tv//storage/176/61e490edd9d53_Ads%C4%B1z-tasar%C4%B1m-(25).jpg',
     'https://clickia.tv//storage/257/61eb251113b46_Ads%C4%B1z-tasar%C4%B1m-(94).jpg'
   ];
+  final screens = [
+    HomePageScreen(),
+    VideoPage(),
+    NovelHomePage(),
+    MangaHomePage(),
+    SearchWidget()
+  ];
   @override
   Widget build(BuildContext context) {
     double _yukseklik = Constants.getSizeHeight(context);
     double _genislik = Constants.getSizeWidth(context);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // LOGO VE GİRİŞ YAP
-            Padding(
-              padding: EdgeInsets.only(
-                  left: _genislik * 0.03, right: _genislik * 0.03),
-              child: HeaderLogoAndLoginButtonWidget(
-                  yukseklik: _yukseklik,
-                  genislik: _genislik,
-                  logo: 'lib/assets/clickialogowhite.png'),
-            ),
-            SizedBox(
-              height: _yukseklik * 0.03,
-            ),
-
-            //Arama  kısmı
-            Padding(
-              padding: EdgeInsets.only(
-                  left: _genislik * 0.03, right: _genislik * 0.03),
-              child: TextField(
-                controller: _searchController,
-                cursorColor: Colors.white,
-                style: const TextStyle(color: Colors.white, fontSize: 17),
-                decoration: const InputDecoration(
-                    hintText: 'içerik,kişi,tür,ara',
-                    hintStyle: TextStyle(color: Colors.white70),
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey))),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          setState(() {
+            _selectedItem = index;
+          });
+        },
+        currentIndex: _selectedItem,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+             backgroundColor: Colors.black,
+              icon: Icon(
+                Icons.home,
+                color: _selectedItem == 0
+                    ? const Color.fromARGB(255, 255, 136, 0)
+                    : null,
               ),
-            ),
-            SizedBox(
-              height: _yukseklik * 0.08,
-            ),
-
-            //1. Slider
-            FutureBuilder(
-              builder: (context, snapshot) {
-                return GestureDetector(
-                  onTap: (() {
-                    Navigator.pushNamed(context, route.watchDetailPage);
-                  }),
-                  child: CarouselSlider(
-                      carouselController: CarouselController(),
-                      items: _sliderImageUrlList
-                          .map(
-                            (e) => SizedBox(
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      child: Image.network(
-                                        e,
-                                        fit: BoxFit.cover,
-                                        width: _genislik,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: _yukseklik * 0.02,
-                                  ),
-                                  SizedBox(
-                                      width: _genislik * 0.2,
-                                      child: AnimatedTextKit(animatedTexts: [
-                                        FadeAnimatedText('Örnek',
-                                            textStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                            duration:
-                                                Duration(milliseconds: 4001))
-                                      ])),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      options: CarouselOptions(
-                          aspectRatio: 1,
-                          autoPlay: true,
-                          viewportFraction: 1,
-                          height: _yukseklik * 0.4,
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 40))),
-                );
-              },
-            ),
-            SizedBox(
-              height: _yukseklik * 0.13,
-            ),
-            //2. Slider
-            FutureBuilder(
-              builder: (context, snapshot) => GestureDetector(
-                onTap: (() {
-                  Navigator.pushNamed(context, route.novelHomePage);
-                }),
-                child: CarouselSlider(
-                    items: images
-                        .map((e) => ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: Image.network(
-                                    e,
-                                    fit: BoxFit.fill,
-                                    width: _genislik * 0.8,
-                                  )),
-                                  SizedBox(
-                                    height: _yukseklik * 0.01,
-                                  ),
-                                  if (e ==
-                                      'https://clickia.tv//storage/310/623a145972ee2_8d23c7ec-5d01-452d-a54e-734a3a5bf838png')
-                                    const Text(
-                                      'İhtişamlı Gençlik',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 22),
-                                    ),
-                                ],
-                              ),
-                            ))
-                        .toList(),
-                    options: CarouselOptions(
-                      aspectRatio: 1,
-                      enlargeCenterPage: true,
-                      enableInfiniteScroll: false,
-                      autoPlay: true,
-                    )),
+              label: 'Anasayfa '),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'lib/assets/dizi.png',
+                height: _yukseklik * 0.03,
+                color: _selectedItem == 1 ? null : Colors.grey,
               ),
-            ),
-            SizedBox(
-              height: _yukseklik * 0.2,
-            ),
-
-            MovieSlider(
-              yukseklik: _yukseklik,
-              genislik: _genislik,
-              kategoriAdi: ['Savaş', 'Barış', 'Aksiyon'],
-              kategoriSayisi: 3,
-            ),
-
-            SizedBox(
-              height: _yukseklik * 0.2,
-            ),
-
-            Text(
-              'Popüler Başlıklar',
-              style: StyleConst.getTextColorWhite().copyWith(
-                fontSize: 30,
+              label: 'Video'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.menu_book_sharp,
+                color: _selectedItem == 2
+                    ? const Color.fromARGB(255, 255, 136, 0)
+                    : null,
               ),
-            ),
-
-            SizedBox(
-              height: _yukseklik * 0.06,
-            ),
-
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _kategoriBaslik.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.only(
-                      left: _genislik * 0.1,
-                      right: _genislik * 0.1,
-                      top: _yukseklik * 0.01),
-                  elevation: 5,
-                  color: Color.fromARGB(136, 30, 29, 29),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: ListTile(
-                      leading: Text('${index + 1}',
-                          style: StyleConst.getKategoriSiraSayisiStyle()),
-                      title: Text('${_kategoriBaslik[index]}',
-                          style: StyleConst.getTextColorWhite()),
-                      subtitle: Text(
-                        _kategoriAltBaslik[index],
-                        style: StyleConst.getTextColorWhite(),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            SizedBox(
-              height: _yukseklik * 0.5,
-            ),
-            const Divider(
-              color: Colors.grey,
-              height: 10,
-            ),
-            SizedBox(
-              height: _yukseklik * 0.2,
-            ),
-
-            socialArea(_yukseklik, _genislik),
-
-            SizedBox(
-              height: _yukseklik * 0.1,
-            ),
-          ],
-        ),
+              label: 'Novel'),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'lib/assets/film.png',
+                color: _selectedItem == 3 ? null : Colors.grey,
+                height: _yukseklik * 0.03,
+              ),
+              label: 'Manga'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: _selectedItem == 4 ? Colors.orange : null,
+              ),
+              label: 'Ara'),
+        ],
+        selectedItemColor: const Color.fromARGB(255, 220, 213, 213),
+        unselectedItemColor: Colors.grey,
+        unselectedIconTheme: const IconThemeData(color: Colors.grey),
+        showUnselectedLabels: true,
+        iconSize: 22,
+        unselectedLabelStyle: const TextStyle(fontSize: 12),
+        selectedLabelStyle: const TextStyle(fontSize: 13), 
       ),
-    );
-  }
-
-  Row socialArea(double _yukseklik, double _genislik) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SocialLogoWidget(
-          yukseklik: _yukseklik,
-          genislik: _genislik,
-          logoPath: LogoPath.getFaceLogo(),
-          socialName: 'Facebook',
-        ),
-        SocialLogoWidget(
-          yukseklik: _yukseklik,
-          genislik: _genislik,
-          logoPath: LogoPath.getTwitterLogoPath(),
-          socialName: 'Twitter',
-        ),
-        SocialLogoWidget(
-          yukseklik: _yukseklik,
-          genislik: _genislik,
-          logoPath: LogoPath.getInstagramLogo(),
-          socialName: 'İnstagram',
-        ),
-        SocialLogoWidget(
-          yukseklik: _yukseklik,
-          genislik: _genislik,
-          logoPath: LogoPath.getYoutubeLogoPath(),
-          socialName: 'YouTube',
-        ),
-      ],
+      extendBodyBehindAppBar: true,
+      appBar: _selectedItem == 0 || _selectedItem==1 || _selectedItem==2
+          ? AppBar(
+              elevation: 0.0,
+              backgroundColor: Colors.transparent,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.account_box),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfileScreen(),
+                        ));
+                  },
+                )
+              ],
+              leading: Padding(
+                padding: EdgeInsets.only(left: _genislik * 0.02),
+                child: Image.asset(
+                  LogoPath.getClickiaLogo(),
+                  width: _genislik * 0.1,
+                  height: _yukseklik * 0.05,
+                ),
+              ),
+            )
+          : null,
+      body: screens[_selectedItem],
     );
   }
 }

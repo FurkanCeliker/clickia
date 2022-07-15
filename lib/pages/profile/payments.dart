@@ -21,6 +21,13 @@ class _PaymentsState extends State<Payments> {
     double _genislik = Constants.getSizeWidth(context);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.black,
+            actions: [Icon(null)],
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {Navigator.pop(context);},
+            )),
         body: SingleChildScrollView(
             child: Column(
           children: [
@@ -40,7 +47,7 @@ class _PaymentsState extends State<Payments> {
                           blurStyle: BlurStyle.normal)
                     ],
                     border: Border.symmetric(
-                        horizontal: BorderSide(color: Colors.orange)),
+                        horizontal: BorderSide(color: Colors.grey)),
                     color: Colors.grey),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -74,7 +81,8 @@ class _PaymentsState extends State<Payments> {
                     height: _yukseklik * 0.07,
                     decoration: BoxDecoration(
                         color: Colors.white70,
-                        border: Border(bottom: BorderSide(color: Colors.white))),
+                        border:
+                            Border(bottom: BorderSide(color: Colors.white))),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -83,20 +91,21 @@ class _PaymentsState extends State<Payments> {
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                            return Row(
-                              
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(width: _genislik*0.10,),
-                                Text(
-                                payments.values.elementAt(index),
-                                style: StyleConst.getPaymentsContentsTextStyle(),
+                              return Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width: _genislik * 0.10,
+                                  ),
+                                  Text(
+                                    payments.values.elementAt(index),
+                                    style: StyleConst
+                                        .getPaymentsContentsTextStyle(),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                              ],
-                            );
-                          },),
-                          
-                          
                         ]),
                   ),
                 );

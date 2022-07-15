@@ -1,4 +1,5 @@
 import 'package:clickia/pages/home/home_page.dart';
+import 'package:clickia/pages/home/home_page_screen.dart';
 import 'package:clickia/pages/login/login.dart';
 import 'package:clickia/pages/manga/manga_detail_page.dart';
 import 'package:clickia/pages/manga/manga_home_page.dart';
@@ -14,6 +15,8 @@ import 'package:clickia/pages/profile/payments.dart';
 import 'package:clickia/pages/profile/profile.dart';
 import 'package:clickia/pages/profile/settings.dart';
 import 'package:clickia/pages/register/register_page.dart';
+import 'package:clickia/pages/search/search.dart';
+import 'package:clickia/pages/video/video_page.dart';
 import 'package:clickia/pages/watch_detail/watch_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,12 +29,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Color(0xff000000))
-          .copyWith(textTheme: GoogleFonts.sourceSerifProTextTheme()),
+          .copyWith(textTheme: GoogleFonts.bakbakOneTextTheme()),
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-     home: WatchDetailPage(),
-      /*
-      onGenerateRoute: route.controller,
+      home: LoginPage(),
+      /*onGenerateRoute: route.controller,
       initialRoute: route.loginPage,*/
     );
   }

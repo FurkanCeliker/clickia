@@ -13,11 +13,28 @@ class MyFavorite extends StatefulWidget {
 
 class _MyFavoriteState extends State<MyFavorite> {
   final List<Map> _myFavorite = [
+    { 
+      'id':0,
+      'name': 'Gençliğe Selam Dur',
+      'img':'https://puui.qpic.cn/vcover_hz_pic/0/mzc00200v3lnbmd1650207570814/0',
+          
+    },
+    { 
+      'id':1,
+      'name':'Başımın Tatlı Belası',
+      'img':'https://puui.qpic.cn/vcover_hz_pic/0/mzc00200moikwsy1651722687454/0'
+    },
     {
-      'Gençliğe Selam Dur':
-          'https://puui.qpic.cn/vcover_hz_pic/0/mzc00200v3lnbmd1650207570814/0',
-          'Başımın Tatlı Belası':'https://puui.qpic.cn/vcover_hz_pic/0/mzc00200moikwsy1651722687454/0'
-    }
+      'id':2,
+      'name':'Komşuda Aşk',
+      'img':'https://clickia.tv/storage/227/61e7f13811b75_Adsız-tasarım-(61).jpg'
+    },
+    {
+      'id':3,
+      'name':'Tesadüfi Dünya',
+      'img':'https://clickia.tv/storage/64/61deb0b22f595_Ads%C4%B1z-tasar%C4%B1m.jpg'
+    },
+    
   ];
   @override
   Widget build(BuildContext context) {
@@ -25,13 +42,12 @@ class _MyFavoriteState extends State<MyFavorite> {
     double _genislik = Constants.getSizeWidth(context);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
+          Navigator.pop(context);
+        }),
+        actions:const [Icon(null)],
         backgroundColor: Colors.transparent,
-        title:const Center(
-          child: Text(
-            'Favorilerim',
-            style: TextStyle(fontSize: 22),
-          ),
-        ),
+        
       ),
       body: Column(
         children: [

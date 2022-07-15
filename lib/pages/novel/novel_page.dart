@@ -1,7 +1,7 @@
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/constants/style.dart';
+import 'package:clickia/pages/novel/novel_detail_page.dart';
 import 'package:clickia/pages/watch_detail/watch_detail_page.dart';
-import 'package:clickia/widgets/comments_area_widget.dart';
 import 'package:clickia/widgets/novel_chapters_widget.dart';
 import 'package:clickia/widgets/novel_detail_button_widget.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
@@ -50,7 +50,7 @@ class _NovelPageState extends State<NovelPage> {
                 height: _yukseklik * 0.7,
                 width: _genislik,
                 decoration: BoxDecoration(
-                    boxShadow: [
+                    boxShadow:const [
                       BoxShadow(
                           color: Colors.grey,
                           blurRadius: 3,
@@ -82,19 +82,19 @@ class _NovelPageState extends State<NovelPage> {
                 SizedBox(
                   width: _genislik * 0.065,
                 ),
-                Icon(Icons.bookmark),
+               const Icon(Icons.bookmark),
                 SizedBox(
                   width: _genislik * 0.03,
                 ),
-                Text('Tarihi'),
+               const Text('Tarihi'),
                 SizedBox(
                   width: _genislik * 0.03,
                 ),
-                Icon(Icons.file_open),
+               const Icon(Icons.file_open),
                 SizedBox(
                   width: _genislik * 0.03,
                 ),
-                Text('10 Bölüm'),
+               const Text('10 Bölüm'),
                 SizedBox(
                   width: _genislik * 0.02,
                 ),
@@ -116,10 +116,10 @@ class _NovelPageState extends State<NovelPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 NovelPageElevatedButtonWidget(
-                    buttonColor: Color(0xff2850E0),
+                    buttonColor: const Color(0xff2850E0),
                     buttonContent: Text('Okumaya Başla!'),
                     onTapButton: () {
-                      Navigator.pushNamed(context, route.novelDetailPage);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => NovelDetailPage(),));
                     }),
                 NovelPageElevatedButtonWidget(
                   buttonContent: Row(
@@ -175,21 +175,10 @@ class _NovelPageState extends State<NovelPage> {
                           child: const Text(
                               'Laçin babasının intikamını alma yolunda kendini adamış bir kız çocuğu ve tanrıların ona bahşettiği güçleri kendi amaçları uğrana kullanmaya başlayınca işle karışır. '),
                         ),
-                        SizedBox(
-                          height: _yukseklik * 0.09,
-                        ),
-                        Center(
-                            child: Text(
-                          'Yorumlar',
-                          style: StyleConst.getNovelPageTitleStyle()
-                              .copyWith(fontSize: 25),
-                        )),
-                        SizedBox(
-                          height: _yukseklik * 0.05,
-                        ),
-                        CommentsAreaWidget(
-                            yorumlar: yorumlar,
-                            textStyle: StyleConst.getTextColorBlack()),
+                        
+                        
+                        
+                        
                       ],
                     ),
                     // Bölümler

@@ -16,11 +16,11 @@ class StyleConst {
   }
 
   static TextStyle getRankingCategoryTitle() {
-    return const TextStyle(color: Colors.white, fontSize: 20);
+    return const TextStyle(color: Colors.white, fontSize: 16);
   }
 
   static TextStyle getRankingTitleStyle() {
-    return const TextStyle(color: Colors.black, fontSize: 20);
+    return const TextStyle(color: Colors.black, fontSize: 16);
   }
 
   static TextStyle getRankingSubtitleStyle() {
@@ -28,7 +28,7 @@ class StyleConst {
   }
 
   static TextStyle getRankingNumber() {
-    return const TextStyle(color: Colors.red, fontSize: 20);
+    return const TextStyle(color: Colors.red, fontSize: 16);
   }
 
   static TextStyle getNovelPageCategoryTitle() {
@@ -62,7 +62,7 @@ class StyleConst {
     return const TextStyle(color: Colors.black,fontSize: 20,);
   }
   static TextStyle getMyAccountTextStyle(){
-    return const TextStyle(color: Colors.white,fontSize: 18);
+    return const TextStyle(color: Colors.white,fontSize: 15);
   }
   static TextStyle getPaymentsContentsTextStyle(){
     return TextStyle(
@@ -73,7 +73,7 @@ class StyleConst {
   }
   static getPaymentsTitleStyle(){
     return TextStyle(
-      color: Colors.orange.shade300,
+      color: Colors.black,
       fontSize: 20,
       fontWeight: FontWeight.bold
     );

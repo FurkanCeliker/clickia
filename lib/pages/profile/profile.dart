@@ -11,8 +11,13 @@ class ProfileScreen extends StatelessWidget {
     double _genislik = Constants.getSizeWidth(context);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        actions: const [Icon(null)],
         backgroundColor: Colors.black,
-        title: Center(child: Text('Profil')),
       ),
       body: BodyWidget(),
     );

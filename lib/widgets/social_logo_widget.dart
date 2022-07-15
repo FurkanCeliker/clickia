@@ -29,16 +29,13 @@ class SocialLogoWidget extends StatelessWidget {
           child: FloatingActionButton(
             backgroundColor: Colors.transparent,
             onPressed: () {},
-            child: SvgPicture.asset(_logoPath),
+            child: SvgPicture.asset(_logoPath,color: Colors.white,),
           ),
         ),
         SizedBox(
           height: _yukseklik * 0.02,
         ),
-        Text(
-          _socialName,
-          style: TextStyle(color: Colors.white, fontSize: 15),
-        ),
+        
       ],
     );
   }
