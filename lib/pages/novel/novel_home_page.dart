@@ -40,35 +40,35 @@ class _NovelHomePageState extends State<NovelHomePage>
       'name': 'Terror Infinity',
       'category': 'Fantasy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/376/62baf56320e96_adsiz-tasarim-31jpg'
+          'https://clickia.tv/storage/396/62cc65139e22d_tales-of-demons-gods-clickiajpg'
     },
     {
       'id': '1',
       'name': 'Release That Witch',
       'category': 'Action',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/364/62b9b8f966f05_adsiz-tasarim-20jpg'
+          'https://clickia.tv/storage/402/62cc698d64250_swallowed-star-clickiajpg'
     },
     {
       'id': '2',
       'name': 'Martial World',
       'category': 'Comedy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/370/62b9c548bc4ee_adsiz-tasarim-26jpg'
+          'https://clickia.tv/storage/397/62cc65fb687c8_terror-infinite-clickiajpg'
     },
     {
       'id': '3',
       'name': 'Rebirth Of The Theif',
       'category': 'Comedy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/368/62b9c11f0688d_adsiz-tasarim-24jpg'
+          'https://clickia.tv/storage/395/62cc6406ec59b_relaese-that-witch-clickiajpg'
     },
     {
       'id': '4',
       'name': 'Rebirth Of The Theif',
       'category': 'Comedy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/368/62b9c11f0688d_adsiz-tasarim-24jpg'
+          'https://clickia.tv/storage/399/62cc67050d10a_true-martial-world-clickiajpg'
     }
   ];
   List<String> categoryImageList = [
@@ -84,11 +84,11 @@ class _NovelHomePageState extends State<NovelHomePage>
     'https://img.webnovel.com/bookcover/17932851106749705/150/150.jpg?coverUpdateTime=1647248369872&imageMogr2/quality/80'
   ];
   List novelContentImageList = [
-    'https://ctv.emresarioglu.com.tr//storage/370/62b9c548bc4ee_adsiz-tasarim-26jpg',
-    'https://ctv.emresarioglu.com.tr//storage/364/62b9b8f966f05_adsiz-tasarim-20jpg',
-    'https://ctv.emresarioglu.com.tr//storage/376/62baf56320e96_adsiz-tasarim-31jpg',
-    'https://ctv.emresarioglu.com.tr//storage/338/6297517d03f0b_hoodjpg',
-    'https://ctv.emresarioglu.com.tr//storage/380/62baf70208190_adsiz-tasarim-35jpg'
+    'https://clickia.tv/storage/397/62cc65fb687c8_terror-infinite-clickiajpg',
+    'https://clickia.tv/storage/399/62cc67050d10a_true-martial-world-clickiajpg',
+    'https://clickia.tv/storage/393/62cc633dca14d_my-vampire-system-clickiajpg',
+    'https://clickia.tv/storage/398/62cc665d560da_the-dark-king-clickiajpg',
+    'https://clickia.tv/storage/401/62cc69658bcac_xian-ni-clickiajpg'
   ];
   List _sliderImageList = [
     'https://webbanner.webnovel.com/0_banner_1608779096_9391.jpg',
@@ -118,19 +118,18 @@ class _NovelHomePageState extends State<NovelHomePage>
     String titleOrnek = '1.Assassination Through the';
     String contentOrnek =
         'Cedric Reyes has a secret, he is the heir and eldest sonof the rich and powerful Reyes clan. As tradition all heirs of their family have to go through a form of poverty training at the age of fifteen. They are left to fend for themselves with no contact and barely any money.';
-     Offset img2offset= Offset(-15, 0);
+    Offset img2offset = Offset(-15, 0);
     double sliderOneX = 15;
     double sliderOneY = 0;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: _yukseklik * 0.02,
+              height: _yukseklik * 0.08,
             ),
             BenzerIceriklerSlider(
                 imageList: novelContentImageList,
@@ -155,10 +154,8 @@ class _NovelHomePageState extends State<NovelHomePage>
                 categoryImageList: categoryImageList,
                 categoryTitleList: categoryTitleList,
                 categoryName: 'Macera'),
-                SizedBox(
-                  height: _yukseklik*0.02
-                ),
-                BenzerIceriklerSlider(
+            SizedBox(height: _yukseklik * 0.02),
+            BenzerIceriklerSlider(
                 imageList: novelContentImageList,
                 yukseklik: _yukseklik,
                 genislik: _genislik,
@@ -170,7 +167,7 @@ class _NovelHomePageState extends State<NovelHomePage>
                       ));
                 }),
             SizedBox(
-              height: _yukseklik * 0.02,
+              height: _yukseklik * 0.05,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: _genislik * 0.03),
@@ -211,7 +208,12 @@ class _NovelHomePageState extends State<NovelHomePage>
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => NovelPage(),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    NovelPage(),
+                                              ));
                                         },
                                         child: Row(
                                           children: [
@@ -387,7 +389,7 @@ class NovelCategoryCoverAndContents extends StatelessWidget {
           ),
         ),
         Container(
-          color: const Color(0xffF6F7FC),
+          color: Color(0xffF6F7FC),
           child: Column(children: [
             AspectRatio(
               aspectRatio: 1,
@@ -429,7 +431,6 @@ class NovelCategoryCoverAndContents extends StatelessWidget {
                 },
               ),
             ),
-            
           ]),
         ),
       ],

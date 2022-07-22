@@ -14,8 +14,9 @@ class MangaDetailPage extends StatefulWidget {
 
 class _MangaDetailPageState extends State<MangaDetailPage> {
   List mangas = [
-    'https://w7.pngwing.com/pngs/772/867/png-transparent-mangaka-arm-anime-joint-cartoon-couples-black-hair-manga-cartoon.png',
+    
     'https://i.pinimg.com/736x/f6/10/97/f610978ed5813dd6014084e1181191dc.jpg',
+    'https://w7.pngwing.com/pngs/772/867/png-transparent-mangaka-arm-anime-joint-cartoon-couples-black-hair-manga-cartoon.png',
     'https://i.pinimg.com/originals/ac/59/c6/ac59c631fb4b3451981d0c0d4d9dd15b.jpg',
   ];
 

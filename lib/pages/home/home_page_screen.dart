@@ -150,7 +150,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 'https://clickia.tv//storage/347/628df35917c9b_adsiz-tasarim-20jpg'
               ],
             ),
-
+            
             MovieSliderV2(
               kategoriSayisi: 1,
               yukseklik: _yukseklik,

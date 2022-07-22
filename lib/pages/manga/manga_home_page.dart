@@ -5,6 +5,7 @@ import 'package:clickia/constants/logo_path.dart';
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/constants/style.dart';
 import 'package:clickia/pages/manga/manga_detail_page.dart';
+import 'package:clickia/pages/manga/manga_page.dart';
 import 'package:clickia/pages/novel/novel_detail_page.dart';
 import 'package:clickia/widgets/dizi_film_manga_kategori_widget.dart';
 import 'package:clickia/widgets/novel_category_icerik.dart';
@@ -40,35 +41,35 @@ class _MangaHomePageState extends State<MangaHomePage>
       'name': 'Terror Infinity',
       'category': 'Fantasy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/376/62baf56320e96_adsiz-tasarim-31jpg'
+          'https://clickia.tv/storage/396/62cc65139e22d_tales-of-demons-gods-clickiajpg'
     },
     {
       'id': '1',
       'name': 'Release That Witch',
       'category': 'Action',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/364/62b9b8f966f05_adsiz-tasarim-20jpg'
+          'https://clickia.tv/storage/402/62cc698d64250_swallowed-star-clickiajpg'
     },
     {
       'id': '2',
       'name': 'Martial World',
       'category': 'Comedy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/370/62b9c548bc4ee_adsiz-tasarim-26jpg'
+          'https://clickia.tv/storage/397/62cc65fb687c8_terror-infinite-clickiajpg'
     },
     {
       'id': '3',
       'name': 'Rebirth Of The Theif',
       'category': 'Comedy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/368/62b9c11f0688d_adsiz-tasarim-24jpg'
+          'https://clickia.tv/storage/395/62cc6406ec59b_relaese-that-witch-clickiajpg'
     },
     {
       'id': '4',
       'name': 'Rebirth Of The Theif',
       'category': 'Comedy',
       'img':
-          'https://ctv.emresarioglu.com.tr//storage/368/62b9c11f0688d_adsiz-tasarim-24jpg'
+          'https://clickia.tv/storage/399/62cc67050d10a_true-martial-world-clickiajpg'
     }
   ];
   List<String> categoryImageList = [
@@ -84,11 +85,11 @@ class _MangaHomePageState extends State<MangaHomePage>
     'https://img.webnovel.com/bookcover/17932851106749705/150/150.jpg?coverUpdateTime=1647248369872&imageMogr2/quality/80'
   ];
   List novelContentImageList = [
-    'https://ctv.emresarioglu.com.tr//storage/370/62b9c548bc4ee_adsiz-tasarim-26jpg',
-    'https://ctv.emresarioglu.com.tr//storage/364/62b9b8f966f05_adsiz-tasarim-20jpg',
-    'https://ctv.emresarioglu.com.tr//storage/376/62baf56320e96_adsiz-tasarim-31jpg',
-    'https://ctv.emresarioglu.com.tr//storage/338/6297517d03f0b_hoodjpg',
-    'https://ctv.emresarioglu.com.tr//storage/380/62baf70208190_adsiz-tasarim-35jpg'
+    'https://clickia.tv/storage/397/62cc65fb687c8_terror-infinite-clickiajpg',
+    'https://clickia.tv/storage/399/62cc67050d10a_true-martial-world-clickiajpg',
+    'https://clickia.tv/storage/393/62cc633dca14d_my-vampire-system-clickiajpg',
+    'https://clickia.tv/storage/398/62cc665d560da_the-dark-king-clickiajpg',
+    'https://clickia.tv/storage/401/62cc69658bcac_xian-ni-clickiajpg'
   ];
   List _sliderImageList = [
     'https://webbanner.webnovel.com/0_banner_1608779096_9391.jpg',
@@ -130,7 +131,7 @@ class _MangaHomePageState extends State<MangaHomePage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: _yukseklik * 0.02,
+              height: _yukseklik * 0.08,
             ),
             BenzerIceriklerSlider(
                 imageList: novelContentImageList,
@@ -140,7 +141,7 @@ class _MangaHomePageState extends State<MangaHomePage>
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MangaDetailPage(),
+                        builder: (context) => MangaPage(),
                       ));
                 }),
             SizedBox(
@@ -166,11 +167,11 @@ class _MangaHomePageState extends State<MangaHomePage>
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MangaDetailPage(),
+                        builder: (context) => MangaPage(),
                       ));
                 }),
             SizedBox(
-              height: _yukseklik * 0.02,
+              height: _yukseklik * 0.05,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: _genislik * 0.03),
@@ -210,7 +211,7 @@ class _MangaHomePageState extends State<MangaHomePage>
                                   return Column(
                                     children: [
                                       InkWell(
-                                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => MangaDetailPage(),));},
+                                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => MangaPage(),));},
                                         child: Row(
                                           children: [
                                             Container(

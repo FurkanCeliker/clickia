@@ -1,8 +1,8 @@
-import 'dart:ffi';
 
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/widgets/my_favorite_list_widget.dart';
 import 'package:flutter/material.dart';
+
 
 class MyFavorite extends StatefulWidget {
   MyFavorite({Key? key}) : super(key: key);
@@ -42,6 +42,10 @@ class _MyFavoriteState extends State<MyFavorite> {
     double _genislik = Constants.getSizeWidth(context);
     return Scaffold(
       appBar: AppBar(
+        title: Padding(
+          padding:  EdgeInsets.only(right: _genislik*0.1),
+          child: Center(child: Text('Favorilerim')),
+        ),
         leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
           Navigator.pop(context);
         }),

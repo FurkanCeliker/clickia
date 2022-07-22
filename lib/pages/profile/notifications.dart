@@ -18,8 +18,13 @@ class _NotificationsState extends State<Notifications> {
     double _genislik = Constants.getSizeWidth(context);
     return Scaffold(
       appBar: AppBar(
+        title: Padding(
+          padding:  EdgeInsets.only(right: _genislik*0.1),
+          child: Center(child: Text('Bildirimler')),
+        ),
         leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
           Navigator.pop(context);
+          
         }),
         actions:const [Icon(null)],
           backgroundColor: Colors.transparent,

@@ -61,51 +61,53 @@ class MovieSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: _kategoriSayisi,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: _yukseklik * 0.01,
-              ),
-              Text(
-                kategoriAdi[index],
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
-              SizedBox(
-                height: _yukseklik * 0.01,
-              ),
-              SizedBox(
-                height: _yukseklik * 0.23,
-                width: _genislik * 1,
-                child: GridView.builder(
-                    // Future builder içine al
-                    itemCount: _imageList.length, // apiden gelen veri eklenecek
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      mainAxisSpacing: 0,
-                      childAspectRatio: 1.3,
-                    ),
-                    itemBuilder: (context, i) {
-                      return SliderWidget(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => WatchDetailPage(),));
-                        },
-                        yukseklik: _yukseklik,
-                        genislik: _genislik,
-                        url: _imageList[i],
-                      );
-                    }),
-              ),
-            ],
-          );
-        });
+          padding: EdgeInsets.only(bottom: _yukseklik*0.01),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: _kategoriSayisi,
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: _yukseklik * 0.01,
+                ),
+                Text(
+                  kategoriAdi[index],
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                SizedBox(
+                  height: _yukseklik * 0.01,
+                ),
+                SizedBox(
+                  height: _yukseklik * 0.23,
+                  width: _genislik * 1,
+                  child: GridView.builder(
+                      // Future builder içine al
+                      itemCount: _imageList.length, // apiden gelen veri eklenecek
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 0,
+                        childAspectRatio: 1.3,
+                      ),
+                      itemBuilder: (context, i) {
+                        return SliderWidget(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => WatchDetailPage(),));
+                          },
+                          yukseklik: _yukseklik,
+                          genislik: _genislik,
+                          url: _imageList[i],
+                        );
+                      }),
+                ),
+              ],
+            );
+          }
+    );
   }
 }
 
@@ -176,40 +178,43 @@ class MovieSliderV2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: _kategoriSayisi,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: _yukseklik * 0.36,
-                width: _genislik,
-                child: GridView.builder(
-                    // Future builder içine al
-                    itemCount: _imageList.length, // apiden gelen veri eklenecek
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      mainAxisSpacing: 0,
-                      childAspectRatio: 1.35,
-                    ),
-                    itemBuilder: (context, i) {
-                      return SliderWidget(
-                        onTap: _onTap,
-                        yukseklik: _yukseklik,
-                        genislik: _genislik,
-                        url: _imageList[i],
-                      );
-                    }),
-              ),
-            ],
-          );
-        });
+    return  ListView.builder(
+          padding: EdgeInsets.only(bottom: _yukseklik*0.00,top: _yukseklik*0.00),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: _kategoriSayisi,
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: _yukseklik*0.03,),
+                SizedBox(
+                  height: _yukseklik * 0.36,
+                  width: _genislik,
+                  child: GridView.builder(
+                      // Future builder içine al
+                      itemCount: _imageList.length, // apiden gelen veri eklenecek
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisSpacing: 0,
+                        childAspectRatio: 1.35,
+                      ),
+                      itemBuilder: (context, i) {
+                        return SliderWidget(
+                          onTap: _onTap,
+                          yukseklik: _yukseklik,
+                          genislik: _genislik,
+                          url: _imageList[i],
+                        );
+                      }),
+                ),
+              ],
+            );
+          }
+    );
   }
 }
 

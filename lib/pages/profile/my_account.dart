@@ -25,6 +25,10 @@ class _MyAccountState extends State<MyAccount> {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.black,
+            title:  Padding(
+              padding:  EdgeInsets.only(right: _genislik*0.1),
+              child: Center(child: Text('Hesap Bilgilerim')),
+            ),
             leading: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios,

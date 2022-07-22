@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:clickia/constants/screen.dart';
 import 'package:clickia/widgets/novel_icerik_slider.dart';

@@ -24,6 +24,10 @@ class _PaymentsState extends State<Payments> {
         appBar: AppBar(
             backgroundColor: Colors.black,
             actions: [Icon(null)],
+            title: Padding(
+              padding:  EdgeInsets.only(right: _genislik*0.1),
+              child: Center(child: Text('Ödemelerim')),
+            ),
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios),
               onPressed: () {Navigator.pop(context);},

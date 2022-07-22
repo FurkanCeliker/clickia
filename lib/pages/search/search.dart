@@ -99,7 +99,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               ),
             ),
             SizedBox(
-              height: _genislik * 0.02,
+              height: _genislik * 0.09,
             ),
             Expanded(
                 child: _foundUsers.isNotEmpty

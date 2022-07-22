@@ -69,11 +69,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  image_picker: ^0.8.5+3
   flutter_native_splash: ^2.1.6
+  flutter_launcher_icons: ^0.9.3
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/clickiapplogo.png"
 flutter_native_splash:
   color: "#0d0d0d"
-  image: assets/clickialogowhite.png
+  image: lib/assets/clickialogowhitesplash.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

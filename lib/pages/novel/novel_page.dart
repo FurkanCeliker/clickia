@@ -17,7 +17,10 @@ class NovelPage extends StatefulWidget {
 }
 
 class _NovelPageState extends State<NovelPage> {
+  bool _isLike=false;
   List chapters = [
+
+    
     'Beklenmeyen Ölüm',
     'Laçin Güçlerini Keşfediyor',
     'Mektup',
@@ -29,6 +32,7 @@ class _NovelPageState extends State<NovelPage> {
     "Eski Savaş ve Yeni Dedektif",
     "Kaira'nın Gerçek Formu"
   ];
+  List<Map<dynamic,dynamic>> _yorumlar=[{'id':'1','adi':'selçuk','yorum':'Çok iyiydi','tarih':'19.07.2022'},{'id':'1','adi':'Kürşat','yorum':'İçerik çok kaliteli','tarih':'19.07.2022'},{'id':'1','adi':'Yalçın','yorum':'Devam etmeli merakla takip ediyorum','tarih':'19.07.2022'}];
   String NovelPageImage =
       'https://img.webnovel.com/bookcover/18549008105094005/600/600.jpg?coverUpdateTime=1636927397380&imageMogr2/quality/40';
   @override
@@ -66,12 +70,26 @@ class _NovelPageState extends State<NovelPage> {
             SizedBox(
               height: _yukseklik * 0.02,
             ),
-            Padding(
-              padding: EdgeInsets.only(left: _genislik * 0.07),
-              child: Text(
-                'Laçin',
-                style: StyleConst.getNovelPageTitleStyle(),
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: _genislik * 0.07),
+                  child: Text(
+                    'Laçin',
+                    style: StyleConst.getNovelPageTitleStyle(),
+                  ),
+                ),
+                WatchDetailiconButtonWidget(
+                  color: _isLike == false ? Colors.grey : Colors.blue,
+                  icon: Icons.thumb_up,
+                  onPressed: (){
+                    setState(() {
+                      _isLike=!_isLike;
+                    });
+                  },
+                  size: 22,
+                )
+              ],
             ),
             SizedBox(
               height: _yukseklik * 0.02,
@@ -176,7 +194,24 @@ class _NovelPageState extends State<NovelPage> {
                               'Laçin babasının intikamını alma yolunda kendini adamış bir kız çocuğu ve tanrıların ona bahşettiği güçleri kendi amaçları uğrana kullanmaya başlayınca işle karışır. '),
                         ),
                         
-                        
+                        SizedBox(height: _yukseklik*0.15,),
+                         Padding(
+                           padding:  EdgeInsets.only(left: _genislik*0.05),
+                           child: Text('Yorumlar',style: TextStyle(color: Colors.black,fontSize: 25)),
+                         ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: _yorumlar.length,
+                          itemBuilder: (context, index) {
+                          Map<dynamic,dynamic> yorum= _yorumlar[index];
+                          return ListTile(        
+                            leading:  Icon(Icons.comment,size: 30,color: Colors.black,),
+                            title: Text(yorum['adi'],style: TextStyle(fontSize: 18),),
+                            subtitle: Text(yorum['yorum']),
+                            trailing: Text(yorum['tarih']),
+                          );
+                        },),
                         
                         
                       ],
